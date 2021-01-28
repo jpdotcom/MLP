@@ -130,58 +130,7 @@ def NueralNetwork():
             run_image(image_arr)
             findgradient(label)
             gradientdescent(learning_rate)
-
-
-        
-
-    #Everything down is MNIST data processing
-
-
-    def byte_to_int(n):
-
-        return int.from_bytes(n,'big')
-    def getlabelarr(y_train,max_labels):
-        
-
-        _=y_train.read(4)
-        total_labels=byte_to_int(y_train.read(4))
             
-        labels=[]
-        for i in range(max_labels):
-            
-            labels.append((int.from_bytes(y_train.read(1),'big')))
-        
-        return labels
-
-    def getimgarr(f,max_img):
-
-        
-
-        _=f.read(4)
-
-        total_images=byte_to_int(f.read(4))
-        row=byte_to_int(f.read(4))
-        col=byte_to_int(f.read(4))
-    
-
-        images=[]
-        for i in range(max_img):
-            curr_img=[]
-            for j in range(784):
-            
-                single_pixel=(byte_to_int(f.read(1)))/255
-                curr_img.append(single_pixel)
-            
-            images.append(curr_img)
-        
-        return images
-    def turntolist(layer):
-
-        properties=[]
-
-        properties.append(layer['weights'].tolist())
-        properties.append(layer['bias'].tolist())
-        return properties
     print('Network Created')
     
     (x_train,y_train), (x_test,y_test)=tf.keras.datasets.mnist.load_data()
@@ -191,9 +140,7 @@ def NueralNetwork():
 
     x_train=list(zip(x_train,y_train))
     x_test=list(zip(x_test,y_test))
-    # num_epochs=17
-
-
+    
     def checkaccuracy(num_images):
         global x_test
         global y_test
@@ -212,7 +159,8 @@ def NueralNetwork():
         return correct/total
     print('Images Loaded')
     
-    # TRAINN NETWORK
+    # TRAIN NETWORK
+    # num_epochs=17
     #---------------------------------------------------------------------------------------
     # for x in range(num_epochs):
     #     s=time.time()
